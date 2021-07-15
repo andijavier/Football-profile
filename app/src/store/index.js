@@ -85,8 +85,9 @@ const store = new Vuex.Store({
         }
       })
         .then(res => {
-          // context.commit('setClubProfile', { clubProfile: res.data })
-          console.log(res.data)
+          context.commit('setClubProfile', { clubProfile: res.data })
+          // console.log(res.data)
+          router.push({ name: 'ClubProfile' })
         })
         .catch(err => console.log(err))
     },

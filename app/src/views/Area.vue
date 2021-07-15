@@ -1,9 +1,9 @@
 <template>
   <div class="container p-5 row justify-content-between">
-    <div class="col-4">
+    <div class="col-md-4 col-sm-12">
       <h2>Areas</h2>
     </div>
-    <div class="list col-8">
+    <div class="list col-md-8 col-sm-12">
       <ol class="list-group btn list-group-numbered">
         <li class="list-group-item d-flex justify-content-between align-items-center"
           v-for="(area) in areas" :key="area.area.id"
@@ -44,7 +44,7 @@ export default {
 
 <style>
 .list {
-  max-height: 70vh;
+  max-height: 75vh;
   overflow: auto;
 }
 .btn :hover {
