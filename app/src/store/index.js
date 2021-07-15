@@ -10,7 +10,10 @@ const store = new Vuex.Store({
     areas: [],
     clubs: [],
     clubProfile: {},
-    areaID: 0
+    competitionID: {
+      id: 0,
+      areaName: ''
+    }
   },
   mutations: {
     setAreas (state, payload) {
@@ -22,54 +25,77 @@ const store = new Vuex.Store({
     setClubProfile (state, payload) {
       state.clubProfile = payload.clubProfile
     },
-    setAreaID (state, payload) {
-      state.areaID = payload.areaID
+    setCompetitionID (state, payload) {
+      state.competitionID = payload.competitionID
     }
   },
   actions: {
     getAreas (context) {
+      const areas = []
       axios({
         method: 'GET',
-        url: '/areas',
+        url: '/competitions?plan=TIER_ONE',
         headers: {
           'X-Auth-Token': '6ea42207124e443e9dadda879c2bee5f'
         }
       })
-        .then(res => {
-          context.commit('setAreas', { areas: res.data.areas })
+        .then(({ data }) => {
+          const competition = data.competitions
+          let isCopy = false
+          for (let i = 0; i < competition.length; i++) {
+            isCopy = false
+            if (areas.length) {
+              for (let j = 0; j < areas.length; j++) {
+                if (areas[j].area.id === competition[i].area.id) {
+                  isCopy = true
+                }
+              }
+              if (!isCopy) {
+                areas.push({ area: competition[i].area, id: competition[i].id })
+              }
+            } else {
+              areas.push({ area: competition[i].area, id: competition[i].id })
+            }
+          }
+          context.commit('setAreas', { areas })
         })
         .catch(err => console.log(err))
     },
     getClubs (context) {
+      const competitionID = this.state.competitionID
       axios({
         method: 'GET',
-        url: '/competitions',
+        url: `/competitions/${competitionID.id}/teams`,
         headers: {
           'X-Auth-Token': '6ea42207124e443e9dadda879c2bee5f'
         }
       })
-        .then(res => {
-          context.commit('setClubs', { clubs: res.data })
-          console.log(res.data)
+        .then(({ data }) => {
+          console.log(data.teams)
+          context.commit('setClubs', { clubs: data.teams })
         })
         .catch(err => console.log(err))
     },
     getClubProfile (context, payload) {
       axios({
         method: 'GET',
-        url: '/teams/' + payload.id,
+        url: '/teams/' + payload.clubID,
         headers: {
           'X-Auth-Token': '6ea42207124e443e9dadda879c2bee5f'
         }
       })
         .then(res => {
-          context.commit('setClubProfile', { clubProfile: res.data })
+          // context.commit('setClubProfile', { clubProfile: res.data })
+          console.log(res.data)
         })
         .catch(err => console.log(err))
     },
-    inputAreaID (context, payload) {
-      context.commit('setAreaID', payload)
+    inputCompetitionID (context, payload) {
+      context.commit('setCompetitionID', payload)
       router.push({ name: 'Clubs' })
+    },
+    goBack () {
+      router.back()
     }
   }
 })

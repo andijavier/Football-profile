@@ -6,11 +6,11 @@
     <div class="list col-8">
       <ol class="list-group btn list-group-numbered">
         <li class="list-group-item d-flex justify-content-between align-items-center"
-          v-for="(area) in areas" :key="area.id"
-          @click="goToClubs(area.id)">
+          v-for="(area) in areas" :key="area.area.id"
+          @click="goToClubs(area.id, area.area.name)">
           <div class="ms-2 me-auto">
-            <div class="fw-bold">{{area.countryCode}}</div>
-            {{area.name}}
+            <div class="fw-bold">{{area.area.countryCode}}</div>
+            {{area.area.name}}
           </div>
         </li>
       </ol>
@@ -30,8 +30,13 @@ export default {
     this.$store.dispatch('getAreas')
   },
   methods: {
-    goToClubs (areaID) {
-      this.$store.dispatch('inputAreaID', { areaID })
+    goToClubs (competitionID, areaName) {
+      this.$store.dispatch('inputCompetitionID', {
+        competitionID: {
+          id: competitionID,
+          areaName
+        }
+      })
     }
   }
 }
