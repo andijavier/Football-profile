@@ -38,6 +38,7 @@
 
 <script>
 import PersonelList from '../components/PersonelList.vue'
+
 export default {
   name: 'ClubProfile',
   components: {
@@ -59,14 +60,6 @@ export default {
     goBack () {
       this.$store.dispatch('goBack')
     }
-    // seePersonel () {
-    //   this.$store.dispatch('getPersonel', {
-    //     personel: {
-    //       squad: this.clubProfile.squad,
-    //       clubName: this.clubProfile.name
-    //     }
-    //   })
-    // }
   }
 }
 </script>
