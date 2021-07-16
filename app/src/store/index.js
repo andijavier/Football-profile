@@ -13,7 +13,9 @@ const store = new Vuex.Store({
     competitionID: {
       id: 0,
       areaName: ''
-    }
+    },
+    // personel: [],
+    personelDetail: {}
   },
   mutations: {
     setAreas (state, payload) {
@@ -28,6 +30,9 @@ const store = new Vuex.Store({
     setCompetitionID (state, payload) {
       state.competitionID = payload.competitionID
     }
+    // setPersonel (state, payload) {
+    //   state.personel = payload.personel
+    // }
   },
   actions: {
     getAreas (context) {
@@ -95,6 +100,9 @@ const store = new Vuex.Store({
       context.commit('setCompetitionID', payload)
       router.push({ name: 'Clubs' })
     },
+    // getPersonel (context, payload) {
+    //   context.commit('setPersonel', payload)
+    // },
     goBack () {
       router.back()
     }

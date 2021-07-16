@@ -3,10 +3,12 @@
     <div class="col-md-4 col-sm-12">
       <h2>Clubs</h2>
       <h3>{{clubs.areaName}}</h3>
-      <button class="btn" @click="goBack">
-        <i class="fas fa-angle-double-left"></i>
-        Back
-      </button>
+      <div class="btn my-3">
+        <button class="btn" @click="goBack">
+          <i class="fas fa-angle-double-left"></i>
+          Back
+        </button>
+      </div>
     </div>
     <div class="list col-md-8 col-sm-12">
       <ol class="list-group btn list-group-numbered">

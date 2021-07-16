@@ -8,8 +8,10 @@
           <i class="fas fa-angle-double-left"></i>
           Back
         </button>
-        <button class="btn col-12" @click="seePersonel">
-          <i class="far fa-eye"></i>
+        <button class="btn col-12"
+          data-bs-toggle="modal"
+          data-bs-target="#PersonelList"
+          ><i class="far fa-eye"></i>
           See Personel
         </button>
       </div>
@@ -28,12 +30,19 @@
       <h6>Phone: {{clubProfile.phone}}</h6>
       <h6>Address: {{clubProfile.address}}</h6>
     </div>
+    <PersonelList
+      :personelList="clubProfile.squad"
+      :clubName="clubProfile.name"/>
   </div>
 </template>
 
 <script>
+import PersonelList from '../components/PersonelList.vue'
 export default {
   name: 'ClubProfile',
+  components: {
+    PersonelList
+  },
   computed: {
     clubProfile () {
       return this.$store.state.clubProfile
@@ -49,10 +58,15 @@ export default {
   methods: {
     goBack () {
       this.$store.dispatch('goBack')
-    },
-    seePersonel () {
-      this.$store.dispatch('getPersonel', { clubID: this.clubProfile.id })
     }
+    // seePersonel () {
+    //   this.$store.dispatch('getPersonel', {
+    //     personel: {
+    //       squad: this.clubProfile.squad,
+    //       clubName: this.clubProfile.name
+    //     }
+    //   })
+    // }
   }
 }
 </script>
