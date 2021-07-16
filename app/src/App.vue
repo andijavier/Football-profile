@@ -1,6 +1,9 @@
 <template>
-  <div id="app">
-    <h2>Football Club Profile</h2>
+  <div id="app" class="backColor">
+    <h2 class="backColor">
+      <i class="fas fa-futbol"></i>
+      Football Club Profile
+    </h2>
     <router-view/>
   </div>
 </template>
@@ -19,5 +22,8 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 5vh;
+}
+.backColor {
+  color: #000000
 }
 </style>

@@ -14,8 +14,7 @@ const store = new Vuex.Store({
     competitionID: {
       id: 0,
       areaName: ''
-    },
-    personelDetail: {}
+    }
   },
   mutations: {
     setAreas (state, payload) {
@@ -98,27 +97,6 @@ const store = new Vuex.Store({
         .then(res => {
           context.commit('setClubProfile', { clubProfile: res.data })
           router.push({ name: 'ClubProfile' })
-        })
-        .catch(err => {
-          Swal.fire({
-            title: 'Error!',
-            text: err.message === 'Network Error' ? 'Access Blocked! Please wait a minute' : err.message,
-            icon: 'error',
-            confirmButtonText: 'Cool'
-          })
-        })
-    },
-    getPersonelDetail (context, payload) {
-      axios({
-        method: 'GET',
-        url: '/players/' + payload.personelID,
-        headers: {
-          'X-Auth-Token': '6ea42207124e443e9dadda879c2bee5f'
-        }
-      })
-        .then(res => {
-          console.log(res.data)
-          context.commit('setPersonelDetail', { personel: res.data })
         })
         .catch(err => {
           Swal.fire({

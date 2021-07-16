@@ -1,6 +1,6 @@
 <template>
   <div class="container p-5 row justify-content-between">
-    <div class="col-md-4 col-sm-12">
+    <div class="col-md-4 backColor col-sm-12">
       <h2>Areas</h2>
     </div>
     <div class="list col-md-8 col-sm-12">

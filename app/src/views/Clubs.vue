@@ -1,6 +1,6 @@
 <template>
-  <div class="container p-5 row justify-content-between">
-    <div class="col-md-4 col-sm-12">
+  <div class="container p-5 backColor row justify-content-between">
+    <div class="col-md-4 backColor col-sm-12">
       <h2>Clubs</h2>
       <h3>{{clubs.areaName}}</h3>
       <div class="btn my-3">
