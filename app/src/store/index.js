@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from '../api/axios'
 import router from '../router'
+import Swal from 'sweetalert2'
 
 Vue.use(Vuex)
 
@@ -14,7 +15,6 @@ const store = new Vuex.Store({
       id: 0,
       areaName: ''
     },
-    // personel: [],
     personelDetail: {}
   },
   mutations: {
@@ -30,7 +30,7 @@ const store = new Vuex.Store({
     setCompetitionID (state, payload) {
       state.competitionID = payload.competitionID
     }
-    // setPersonel (state, payload) {
+    // setPersonelDetail (state, payload) {
     //   state.personel = payload.personel
     // }
   },
@@ -76,10 +76,16 @@ const store = new Vuex.Store({
         }
       })
         .then(({ data }) => {
-          console.log(data.teams)
           context.commit('setClubs', { clubs: data.teams })
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+          Swal.fire({
+            title: 'Error!',
+            text: err.message,
+            icon: 'error',
+            confirmButtonText: 'Cool'
+          })
+        })
     },
     getClubProfile (context, payload) {
       axios({
@@ -91,18 +97,21 @@ const store = new Vuex.Store({
       })
         .then(res => {
           context.commit('setClubProfile', { clubProfile: res.data })
-          // console.log(res.data)
           router.push({ name: 'ClubProfile' })
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+          Swal.fire({
+            title: 'Error!',
+            text: err.message === 'Network Error' ? 'Access Blocked! Please wait a minute' : err.message,
+            icon: 'error',
+            confirmButtonText: 'Cool'
+          })
+        })
     },
     inputCompetitionID (context, payload) {
       context.commit('setCompetitionID', payload)
       router.push({ name: 'Clubs' })
     },
-    // getPersonel (context, payload) {
-    //   context.commit('setPersonel', payload)
-    // },
     goBack () {
       router.back()
     }

@@ -7,7 +7,7 @@
           <h5 class="modal-title" id="exampleModalShortTitle">List Personel</h5>
         </div>
         <div class="list modal-body">
-          <ol class="list-group btn list-group-numbered">
+          <ol v-if="personelList.length > 0" class="list-group btn list-group-numbered">
             <li class="list-group-item d-flex justify-content-between align-items-center"
               v-for="(personel) in personelList" :key="personel.id"
               @click="goToPersonelProfile(personel.id)">
@@ -17,6 +17,7 @@
               </div>
             </li>
           </ol>
+          <h5 v-else>Sorry we do not have this data for now</h5>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

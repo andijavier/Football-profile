@@ -18,7 +18,7 @@
     </div>
     <div class="col-md-8 col-sm-12">
       <img
-        class="mb-2"
+        class="mb-2 picture"
         :src="clubProfile.crestUrl"
         alt="clubProfile.crestUrl"/>
       <h4>{{clubProfile.name}} ({{clubProfile.shortName}})</h4>
@@ -72,5 +72,7 @@ export default {
 </script>
 
 <style>
-
+.picture {
+  max-height: 25vh;
+}
 </style>
